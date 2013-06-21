@@ -1,0 +1,132 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<title>MaceHammer</title>
+		<link href='http://fonts.googleapis.com/css?family=Montserrat|Lato' rel='stylesheet' type='text/css'>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<div id="header">
+			<div id="header_content">
+				<h1><img src="http://www.weebly.com/uploads/1/6/7/7/16775006/5481737_orig.png"></h1>
+				<ul>
+					<li><a href="#details">Our Difference</a></li>
+					<li><a href="#about">About Us</a></li>
+					<li><a href="/store">Store</a></li>
+					<li><a href="#details">The MaceHammer Difference</a></li>
+					<li><a href="#knowledge">Knowledge Base</a></li>
+				</ul>
+			</div>
+		</div>
+		<div id="above_fold">
+			<div id="content">
+				<div class="hero">
+					<img src="http://farm4.staticflickr.com/3463/3352283336_0e6e20c461_o.jpg">
+				</div>
+				<div class="info">
+					<h2>The Mace Hammer<br><em>is an evolution of the sledgehammer.</em></h2>
+					<div class="embed">@embed{intro_initial.md}</div>
+					<ul>
+						<li id="sphere"><a href="#">Spherical</a></li>
+						<li id="handle"><a href="#">Long Handle</a></li>
+						<li id="variety"><a href="#">Grip Variety</a></li>
+						<li id="weight"><a href="#">Variable Weight</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div id="details">
+			<div id="detail_content">
+				<h2>The Evolution of the Sledgehammer</h2>
+				<div id="family">
+					<img src="http://www.weebly.com/uploads/1/6/7/7/16775006/6132290.gif?1370518376">
+				</div>
+				<div id="comp_table">
+					<div class="item header"><h3>MaceHammer</h3></div>
+					<div class="item header"><h3>Sledge hammer</h3></div>
+					
+					<div class="item">Spherical shaped head</div>
+					<div class="item">Flat, rectangular head, small striking area</div>
+					
+					<div class="item">Long handle</div>
+					<div class="item">Short handle limits range of motion</div>
+					
+					<div class="item">Variety of grip positions</div>
+					<div class="item">Single straight handle</div>
+					
+					<div class="item">Ability to change head weight</div>
+					<div class="item">Single weight</div>
+					
+					<div class="item">Made in the United States</div>
+					<div class="item">Made overseas</div>
+				</div>
+			</div>
+		</div>
+		<div id="about">
+			<div id="about_content">
+				<div class="hero">
+					<img src="http://farm4.staticflickr.com/3167/2295530323_f6435343c4_o.jpg">
+				</div>
+				<div class="info">
+					@embed{about.md}
+				</div>
+			</div>
+		</div>
+		<div id="are_you_ready">
+			<div id="are_you_ready_content">
+				<h1>Are you ready</h1><br><h2>to Put the Hammer Down?</h2>
+				<img src="http://f.cl.ly/items/2o2S0C2H1G2Z0N222S1s/sledge.png">
+				<button>Visit the Store</button>
+			</div>
+		</div>
+		<div id="knowledge">
+			<div id="knowledge_content">
+				<div class="hero">
+					<img src="http://f.cl.ly/items/1F2Y051j1e2K1G2Q323n/books.jpg">
+				</div>
+				<div class="info">					
+					<h2>Knowledge Base</h2>
+					<div class="embed">@embed{knowledge_initial.md}</div>
+					<ul>
+						<li id="core" data-title="Mace Hammer Training<br><em>is a Total Body Core Workout.</em>"><a href="#">Core Training</a></li>
+						<li id="tire" data-title="Tire Stations<br><em>Let Any Athletic Swing be Simulated.</em>"><a href="#">Tire Stations</a></li>
+						<li id="shoulder" data-title="Don't Forget:<br><em>Warm-up Your Shoulder</em>"><a href="#">The Shoulder Joint</a></li>
+						<li id="grip" data-title="Mace Hammer Grips<br><em>Bring Open Hand Training to Heavy Ropes.</em>"><a href="#">Rope MaceGrip</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<script>
+			var getHeader = function(index, dict) {
+				var j = 0;
+				for( var k in dict ) {
+					if( j == index ) return k;
+					j++;
+				}
+				return "";
+			};
+			var getCopy = function(index, dict) {
+				return dict[getHeader(index, dict)];
+			};
+			
+		
+			var intro_trait = @json{intro.md};
+			var knowledge_trait = @json{knowledge.md};
+			$("#above_fold .info li").click(function(evt) {
+				evt.preventDefault();
+				$("#above_fold .info li").removeClass("active");				
+				$("#above_fold .info .embed").html(getCopy($(this).index(), intro_trait));
+				$("#above_fold .info h2").html(getHeader($(this).index(), intro_trait));
+				$(this).addClass("active");
+			});
+			$("#knowledge .info li").click(function(evt) {
+				evt.preventDefault();
+				$("#knowledge .info li").removeClass("active");
+				$("#knowledge .info .embed").html(getCopy($(this).index(), knowledge_trait));
+				$("#knowledge .info h2").html(getHeader($(this).index(), knowledge_trait));
+				$(this).addClass("active");
+			});
+		</script>
+	</body>
+</html>

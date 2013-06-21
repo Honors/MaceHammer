@@ -1,0 +1,177 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<link href='http://fonts.googleapis.com/css?family=Montserrat|Lato' rel='stylesheet' type='text/css'>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+	</head>
+	<body>
+		<div id="main">
+			<div id="content">
+				<div id="controls">
+					<button id="save">Save</button>
+				</div>	
+				<div id="page" contenteditable="true"></div>
+			</div>
+			<div id="files">
+				<ul>
+					<li><a href="#">about.md</a></li>
+					<li><a href="#">intro_initial.md</a></li>
+					<li><a href="#">intro.md</a></li>
+					<li><a href="#">knowledge_initial.md</a></li>
+					<li><a href="#">knowledge.md</a></li>
+				</ul>
+			</div>			
+		</div>
+		<div id="header">
+		
+		</div>		
+		<style>
+			body {
+				margin: 0;
+				padding: 0;
+				font-family: 'Lato';
+			}
+			#header {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100px;
+				background: #333;
+			}
+			#main {
+				width: 100%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 100%;
+				box-sizing: border-box;
+				padding-top: 100px;
+			}
+			#files {
+				height: 100%;
+				width: 300px;
+				position: absolute;
+				top: 0;
+				left: 0;
+				box-sizing: border-box;
+				padding-top: 100px;
+			}
+			#content {
+				border-left: 1px solid #333;
+				box-sizing: border-box;
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 100%;
+				width: 100%;
+				background: #e3e3e3;
+				padding-right: 50px;
+				padding-top: 150px;
+				padding-bottom: 50px;
+				padding-left: 350px;
+			}
+			#page {
+				width: 100%;
+				height: 100%;
+				background: white;	
+				border: 1px solid #333;
+				white-space: pre-wrap;
+				overflow: scroll;
+				padding: 20px;
+				box-sizing: border-box;
+			}
+			#files ul {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+				background: white;
+				height: 100%;
+			}
+			#files ul li {
+				background: white;
+				border-bottom: 1px solid #ccc;
+				width: 100%;
+				box-sizing: border-box;
+				padding: 14px 8px;
+			}
+			#files a {
+				text-decoration: none;
+			}
+			#controls {
+				margin: 0;
+				padding: 0;
+				position: absolute;
+				top: 110px;				
+			}
+			#controls button {
+				height: 30px;
+				background: #0C6;
+				background-image: -webkit-linear-gradient(top,#0c6,#04b95e);
+				border-color: #00b058;	
+				cursor: pointer;
+				border-radius: 5px;
+				color: white;
+				border: green;
+				font-weight: bold;
+				padding: 0 20px;
+			}
+		</style>
+		<script>
+			function selection() {
+		        return window.getSelection().getRangeAt(0);
+		    }	
+		    function textSelect(inp, s, e) {
+				e = e || s;
+				if (inp.createTextRange) {
+					var r = inp.createTextRange();
+					r.collapse(true);
+					r.moveEnd('character', e);
+					r.moveStart('character', s);
+					r.select();
+				} else if(inp.setSelectionRange) {
+					inp.focus();
+					inp.setSelectionRange(s, e);
+				}
+			}		    
+		
+			var currentFile;
+			$("#files a").click(function(evt) {
+				evt.preventDefault();
+				currentFile = $(this).text();
+				$.get('/copy/'+currentFile, function(md) {
+					$("#page").text(md);
+				});
+			});
+			$("#page").on("keypress", function(evt) {
+				if( evt.keyCode == 13 ) {
+					evt.preventDefault();
+					var body = $("#page").text();
+					var selected = selection();
+					//$("#page").text([body.substr(0, start), body.substr(start)].join("¶\n"));
+					selected.deleteContents();
+					var para = document.createTextNode("\n");
+					selected.insertNode(para);
+										
+					var range = document.createRange();
+					range.setStartAfter(para);
+					var selected = window.getSelection();
+					selected.removeAllRanges();
+					selected.addRange(range);
+				}
+			});
+			$("#save").click(function() {
+				//.replace(new RegExp(String.fromCharCode(182), "g"), "")
+				$.post('/upload/'+currentFile, $("#page").text(), function(resp) {
+					if( JSON.parse(resp).error ) {
+						alert("Save failed!");
+					} else {
+						alert("File saved.");
+					}
+				});
+			});
+		</script>
+	</body>
+</html>

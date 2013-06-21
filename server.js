@@ -36,7 +36,7 @@ exports.module = http.createServer(function(req, res) {
 		return;
 	}
 
-	var path = __dirname + (req.url == '/' ? '/index.html' : req.url);
+	var path = __dirname + (req.url == '/' ? '/index.html' : (req.url == '/edit' ? '/editor.html' : req.url));
 	fs.stat(path, function(err, stat) {
 	    if (!err && req.url != '/') {
 			res.writeHead(200, {'Content-Type': path.match(/js$/)?'text/javascript':'text/html'});

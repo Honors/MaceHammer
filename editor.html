@@ -25,7 +25,10 @@
 			</div>			
 		</div>
 		<div id="header">
-		
+			<ul>
+				<li><a href="http://daringfireball.net/projects/markdown/syntax">Syntax</a></li>
+				<li><a href="http://mace.mattneary.com">Mace Website</a></li>
+			</ul>
 		</div>		
 		<style>
 			body {
@@ -117,6 +120,28 @@
 				border: green;
 				font-weight: bold;
 				padding: 0 20px;
+			}
+			#header ul {
+				margin: 0;
+				padding: 0;				
+				display: inline;
+				position: absolute;
+				left: 20px;
+				top: 36px;
+				list-style: none;
+			}
+			#header ul li {
+				float: left;
+				margin-right: 10px;
+			}
+			#header a {
+				color: #333;
+				text-decoration: none;
+				padding: 4px;
+			}
+			#header a:hover {
+				background: #ccc;
+				cursor: pointer;
 			}
 		</style>
 		<script>

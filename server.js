@@ -1,5 +1,6 @@
 var http = require('http'),
-	fs = require('fs');
+	fs = require('fs'),
+	app = require('./route');
 var Showdown = require('showdown');
 var converter = new Showdown.converter();
 	
@@ -74,17 +75,50 @@ var findProduct = function(SKU, products) {
 	}
 	return {};
 };
-exports.module = http.createServer(function(req, res) {	
-	if( req.url.match(/^\/upload/) ) {
+app.get({
+	path: /^/,
+	cb: function(req, res) {
+		var map = {
+			'/edit': '/editor.html',
+			'/': '/index.html',
+			'/store': '/store.html',
+		};
+		if( map[req.url] ) {
+			var path = __dirname + map[req.url];
+			res.writeHead(200, {'Content-Type': 'text/html'});
+			fs.readFile(path, function(err, data) {
+				var template = ""+data;
+				renderTemplate(template, function(html) {
+					res.end(html);
+				});
+			});
+		} else {
+			var path = __dirname + req.url;		
+			fs.stat(path, function(err, stat) {
+			    if (!err) {
+					res.writeHead(200, {'Content-Type': path.match(/js$/)?'text/javascript':'text/html'});
+					fs.createReadStream(path).pipe(res);
+			    } else {
+			        res.writeHead(404);
+			        res.end();
+			    }
+			});
+		}		
+	}
+}).post({
+	path: /^\/upload/,
+	cb: function(req, res) {
 		var buffer = [], file = req.url.substr(1).split('/')[1];
 		req.on("data", function(chunk) {buffer.push(chunk)});
 		req.on("end", function() {
 			fs.writeFile(__dirname + '/copy/' + file, buffer, function(err) {
 				res.end(JSON.stringify({ error: err }));
 			});
-		});		
-		return;
-	} else if( req.url == '/pay' ) {
+		});
+	}
+}).post({
+	path: /^\/pay/,
+	cb: function(req, res) {
 		var buffer = [], file = req.url.substr(1).split('/')[1];
 		req.on("data", function(chunk) {buffer.push(chunk)});
 		req.on("end", function() {
@@ -98,34 +132,9 @@ exports.module = http.createServer(function(req, res) {
 				
 				res.end(JSON.stringify({ err: null, success: true }));
 			});
-		});		
-		return;
+		});
 	}
+})
 
-	var path = __dirname + (req.url == '/' ? '/index.html' : (req.url == '/edit' ? '/editor.html' : req.url));
-	fs.stat(path, function(err, stat) {
-	    if (!err && req.url != '/') {
-			res.writeHead(200, {'Content-Type': path.match(/js$/)?'text/javascript':'text/html'});
-			fs.createReadStream(path).pipe(res);
-	    } else if( req.url == '/' ) {
-	    	res.writeHead(200, {'Content-Type': path.match(/js$/)?'text/javascript':'text/html'});
-	    	fs.readFile(__dirname + '/tmpl.html', function(err, data) {
-	    		var template = ""+data;
-	    		renderTemplate(template, function(html) {
-	    			res.end(html);
-	    		});
-	    	});
-	    } else if( req.url == '/store' ) {
-	    	res.writeHead(200, {'Content-Type': path.match(/js$/)?'text/javascript':'text/html'});
-	    	fs.readFile(__dirname + '/store.html', function(err, data) {
-	    		var template = ""+data;
-	    		renderTemplate(template, function(html) {
-	    			res.end(html);
-	    		});
-	    	});
-	    } else {
-	        res.writeHead(404);
-	        res.end();
-	    }
-	});
-}).listen(8080);
+
+exports.module = http.createServer(app);

@@ -80,7 +80,7 @@ app.get({
 	cb: function(req, res) {
 		var map = {
 			'/edit': '/editor.html',
-			'/': '/index.html',
+			'/': '/tmpl.html',
 			'/store': '/store.html',
 		};
 		if( map[req.url] ) {

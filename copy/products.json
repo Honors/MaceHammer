@@ -1,0 +1,43 @@
+[{
+	"image": "http://www.weebly.com/uploads/1/6/7/7/16775006/9810698.gif?1370518284",
+	"name": "MaceHammer 180",
+	"caption": "Hands aligned",
+	"SKU": "MH180",
+	"price": "$X.XX",
+	"length": "XX"
+}, {
+	"image": "http://www.weebly.com/uploads/1/6/7/7/16775006/3816439.gif?1370518012",
+	"name": "MaceHammer Base",
+	"caption": "Accepts interchangeable handles",
+	"SKU": "MHB",
+	"price": "$X.XX",
+	"length": "XX"
+}, {
+	"image": "http://www.weebly.com/uploads/1/6/7/7/16775006/1370518110.png",
+	"name": "MaceHammer 90",
+	"caption": "",
+	"SKU": "MH90",
+	"price": "$X.XX",
+	"length": "XX"
+}, {
+	"image": "http://www.weebly.com/uploads/1/6/7/7/16775006/9813935.gif?1370518097",
+	"name": "MaceHammer 60",
+	"caption": "",
+	"SKU": "MH60",
+	"price": "$X.XX",
+	"length": "XX"
+}, {
+	"image": "http://www.weebly.com/uploads/1/6/7/7/16775006/1370518187.png",
+	"name": "MaceHammer 45",
+	"caption": "",
+	"SKU": "MH45",
+	"price": "$X.XX",
+	"length": "XX"
+}, {
+	"image": "http://www.weebly.com/uploads/1/6/7/7/16775006/1782472.gif?1370518074",
+	"name": "MaceHammer Grips for Heavy Rope",
+	"caption": "",
+	"SKU": "MGHR",
+	"price": "$X.XX",
+	"length": "XX"
+}]

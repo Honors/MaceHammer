@@ -1,0 +1,117 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<title>MaceHammer</title>
+		<link href='http://fonts.googleapis.com/css?family=Montserrat|Lato' rel='stylesheet' type='text/css'>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+		<script src="https://checkout.stripe.com/v2/checkout.js"></script>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<div id="header">
+			<div id="header_content">
+				<h1><a href="/"><img src="http://www.weebly.com/uploads/1/6/7/7/16775006/5481737_orig.png"></a></h1>
+				<ul>
+					<li><a href="/#details">Our Difference</a></li>
+					<li><a href="/#about">About Us</a></li>
+					<li><a href="/store">Store</a></li>
+					<li><a href="/#details">The MaceHammer Difference</a></li>
+					<li><a href="/#knowledge">Knowledge Base</a></li>
+				</ul>
+			</div>
+		</div>
+		<div id='content'></div>										
+		<script>
+			var product_tmpl = "@embed{item_template.html}",
+				products = @raw{products.json};
+			
+			var findProduct = function(SKU) {
+				for( var k in products ) {
+					if( products[k].SKU == SKU ) return products[k];
+				}
+				return {};
+			};
+			
+			for( var k in products ) {
+				var product = products[k];
+				$("#content").append(product_tmpl.replace(/\$\{([^\}]+)\}/g, function($0, $1) {
+					return product[$1];
+				}));
+			}
+			
+			$("button").click(function() {				
+				var product = findProduct($(this).data("product"));
+				var token = function(res){
+					$.post('/pay', JSON.stringify({ token: res.id, SKU: product.SKU }), function(data) {
+						var resp = JSON.parse(data);
+						if( resp.success ) alert("Thanks!");
+						else { alert("Something went wrong..."); }
+					});
+				};
+								
+				StripeCheckout.open({
+					key:         'pk_PApVepYhK0dAPxQ6F5Sy5W1UabLCp',
+					address:     false,
+					amount:      5000,
+					currency:    'usd',
+					name:        product.name,
+					description: product.caption,
+					panelLabel:  'Checkout',
+					token:       token
+				});
+				
+				return false;
+			});
+		</script>
+		<style>
+			#content {
+				position: relative;
+				margin-bottom: 40px;	
+				float: left;			
+			}
+			.item {
+				border: 1px solid #333;
+				float: left;
+				width: 100%;
+				margin-bottom: 10px;				
+			}
+			.item h2 {
+				margin: 0;		
+				width: 700px;		
+			}
+			.item h3 {
+				margin: 0;
+				font-size: 14px;
+				color: #333;
+				width: 700px;
+				font-family: 'Lato';
+			}
+			.item .img_wrapper {
+				width: 200px;
+				height: 300px;
+				overflow: hidden;
+				float: left;
+				margin-right: 20px;
+			}
+			.item img {
+				display: block;
+				width: 100%;
+			}
+			.item .details {
+				float: left;
+				padding: 10px;
+				box-sizing: border-box;
+			}
+			.price, .length {
+				display: block;
+			}
+			button.store {
+				position: relative;
+				font-size: 18px;
+				padding: 3px 10px;
+				margin: 0;
+				margin-top: 10px;
+			}
+		</style>
+	</body>
+</html>

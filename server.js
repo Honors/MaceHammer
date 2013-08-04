@@ -105,6 +105,18 @@ app.get({
 			});
 		}		
 	}
+}).get({
+	path: /^\/purchase\/[^\/]+/,
+	cb: function(req, res) {
+		var path = __dirname + '/checkout.html';
+		res.writeHead(200, {'Content-Type': 'text/html'});
+		fs.readFile(path, function(err, data) {
+			var template = ""+data;
+			renderTemplate(template, function(html) {
+				res.end(html);
+			});
+		});
+	}
 }).post({
 	path: /^\/upload/,
 	cb: function(req, res) {

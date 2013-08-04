@@ -29,19 +29,37 @@
 					if( products[k].SKU == SKU ) return products[k];
 				}
 				return {};
-			};
+			};			
 			
-			for( var k in products ) {
-				var product = products[k];
-				$("#content").append(product_tmpl.replace(/\$\{([^\}]+)\}/g, function($0, $1) {
-					return product[$1];
-				}));
-			}	
+			var product = findProduct(location.pathname.splice('/').pop());
+			$("#content").append(product_tmpl.replace(/\$\{([^\}]+)\}/g, function($0, $1) {
+				return product[$1];
+			}));
 			
-			$("button").click(function() {
+			$("button").click(function() {	
+				console.log("button");
 				var product = findProduct($(this).data("product"));
-				location.href = '/purchase/'+product.SKU;
-			});
+				var token = function(res){
+					$.post('/pay', JSON.stringify({ token: res.id, SKU: product.SKU }), function(data) {
+						var resp = JSON.parse(data);
+						if( resp.success ) alert("Thanks!");
+						else { alert("Something went wrong..."); }
+					});
+				};
+								
+				StripeCheckout.open({
+					key:         'pk_PApVepYhK0dAPxQ6F5Sy5W1UabLCp',
+					address:     false,
+					amount:      5000,
+					currency:    'usd',
+					name:        product.name,
+					description: product.caption,
+					panelLabel:  'Checkout',
+					token:       token
+				});
+				
+				return false;
+			});							
 		</script>
 		<style>
 			#content {

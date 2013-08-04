@@ -5,7 +5,7 @@
 		<link href='http://fonts.googleapis.com/css?family=Montserrat|Lato' rel='stylesheet' type='text/css'>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
 		<script src="https://checkout.stripe.com/v2/checkout.js"></script>
-		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="/style.css" />
 	</head>
 	<body>
 		<div id="header">
@@ -31,13 +31,12 @@
 				return {};
 			};			
 			
-			var product = findProduct(location.pathname.splice('/').pop());
+			var product = findProduct(location.pathname.split('/').pop());
 			$("#content").append(product_tmpl.replace(/\$\{([^\}]+)\}/g, function($0, $1) {
 				return product[$1];
 			}));
 			
 			$("button").click(function() {	
-				console.log("button");
 				var product = findProduct($(this).data("product"));
 				var token = function(res){
 					$.post('/pay', JSON.stringify({ token: res.id, SKU: product.SKU }), function(data) {

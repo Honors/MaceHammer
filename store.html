@@ -38,7 +38,8 @@
 				}));
 			}
 			
-			$("button").click(function() {				
+			$("button").click(function() {	
+				console.log("button");
 				var product = findProduct($(this).data("product"));
 				var token = function(res){
 					$.post('/pay', JSON.stringify({ token: res.id, SKU: product.SKU }), function(data) {
@@ -50,7 +51,7 @@
 								
 				StripeCheckout.open({
 					key:         'pk_PApVepYhK0dAPxQ6F5Sy5W1UabLCp',
-					address:     false,
+					address:     true,
 					amount:      5000,
 					currency:    'usd',
 					name:        product.name,

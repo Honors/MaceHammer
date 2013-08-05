@@ -1,9 +1,24 @@
 var http = require('http'),
 	fs = require('fs'),
-	app = require('./route');
+	app = require('./route'),
+	nodemailer = require("nodemailer");
 var Showdown = require('showdown');
 var converter = new Showdown.converter();
 	
+var smtpTransport = nodemailer.createTransport("SMTP", {
+    service: "Gmail",
+    auth: {
+        user: "neary.matt@gmail.com",
+        pass: "ipnpfirpjlfqdjuj"
+    }
+});
+var mailOptions = {
+    from: "MaceHammer <neary.matt@gmail.com>",
+    to: "neary.matt@gmail.com",
+    subject: "Payment ✔",
+    text: "Payment went through.",
+    html: "<b>Payment went through.</b>"
+};	
 var parseTemplate = function(template, pattern, parser, cb) {
 	var embeds = [], embedReads = {};
 	template.replace(pattern, function(match, name) {
@@ -142,7 +157,9 @@ app.get({
 				
 				// TODO: process payment with stripe...
 				
-				res.end(JSON.stringify({ err: null, success: true }));
+				smtpTransport.sendMail(mailOptions, function(error, response){
+					res.end(JSON.stringify({ err: error, success: !error }));
+				});				
 			});
 		});
 	}

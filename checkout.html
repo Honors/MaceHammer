@@ -39,7 +39,16 @@
 			$("button").click(function() {	
 				var product = findProduct($(this).data("product"));
 				var token = function(res){
-					$.post('/pay', JSON.stringify({ token: res.id, SKU: product.SKU }), function(data) {
+					$.post('/pay', JSON.stringify({
+						token: res.id, 
+						SKU: product.SKU,
+						name: $("customer_name").val(),
+						address: $("customer_address").val(),
+						city: $("customer_city").val(),
+						state: $("customer_state").val(),
+						telephone: $("customer_telephone").val(),
+						email: $("customer_email").val()
+					}), function(data) {
 						var resp = JSON.parse(data);
 						if( resp.success ) alert("Thanks!");
 						else { alert("Something went wrong..."); }

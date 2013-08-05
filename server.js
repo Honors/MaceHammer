@@ -12,13 +12,6 @@ var smtpTransport = nodemailer.createTransport("SMTP", {
         pass: "ipnpfirpjlfqdjuj"
     }
 });
-var mailOptions = {
-    from: "MaceHammer <neary.matt@gmail.com>",
-    to: "neary.matt@gmail.com",
-    subject: "Payment ✔",
-    text: "Payment went through.",
-    html: "<b>Payment went through.</b>"
-};	
 var parseTemplate = function(template, pattern, parser, cb) {
 	var embeds = [], embedReads = {};
 	template.replace(pattern, function(match, name) {
@@ -157,6 +150,13 @@ app.get({
 				
 				// TODO: process payment with stripe...
 				
+				var mailOptions = {
+				    from: "MaceHammer <neary.matt@gmail.com>",
+				    to: "neary.matt@gmail.com",
+				    subject: "Payment ("+purchase.SKU+") ✔: "+purchase.name,
+				    text: "Payment from "+purchase.name,
+				    html: "<b>Payment went through.</b>"
+				};	
 				smtpTransport.sendMail(mailOptions, function(error, response){
 					res.end(JSON.stringify({ err: error, success: !error }));
 				});				

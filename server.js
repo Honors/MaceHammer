@@ -91,6 +91,7 @@ app.get({
 			'/': '/tmpl.html',
 			'/store': '/store.html',
 		};
+		console.log("request")
 		if( map[req.url] ) {
 			var path = __dirname + map[req.url];
 			res.writeHead(200, {'Content-Type': 'text/html'});

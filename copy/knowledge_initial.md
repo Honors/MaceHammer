@@ -1,7 +1,0 @@
-The core is the body's center of power. It essentially consists of the torso minus the arms and legs. The major muscles of the core reside in the pelvic floor, hips, abdomen and the mid and lower back. The major muscles groups are as follows: pelvic floor (psoas, iliacus), hips (gluteus maximus), abdomen (transverus abdominus, internal and external obliques, rectus abdominus) and back (erector spinea, longisimus, Latinisms dorsi, trapezius). All total body movements originate from the core, and it is the source of our strenght, stability and balance.
-
-The core muscles allow for dynamic body movements in three planes of motion or in a combination of planes. The transverse plane (head to toe), the sagittal plane (left to right), and the coronal plane (front to back). These muscle groups are also responsible for our ability to rotate along our long axis.
-
-All of these movements are used on a daily basis to preform basic function (walking, bending, maintaining body posture etc.) and selective skill functions (athletic movements in any sport or activity requiring body movement). It is clear why developing core strength will enhance any and all functional movements. 
-
-MaceHammer training is a total body core exercise with the added benefit of cardio conditioning. It can be preformed as an isolated workout or be incorporated into any training regimen. It's primal nature with the release of adrenaline and production of endorphins provides an outlet for frustration and release of stress.

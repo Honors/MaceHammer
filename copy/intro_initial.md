@@ -1,3 +1,0 @@
-The use of the sledgehammer as a training implement, an art known as "tire bashing," has earned the reputation of being an effective whole body strength and conditioning exercise with an emphasis on core development. The movement starts from the ground up, engaging the muscle groups in the legs, hips, pelvis, chest, back, shoulders, arms and hands.
-
-Engaging both upper and lower body the swing can preform as a total body exercise or as a single sided exercise.  A metabolically demanding exercise, heavy weight, short intense sets will develop strength and anaerobic fitness, whereas light weight, long duration sets will develop muscle endurance and aerobic fitness.

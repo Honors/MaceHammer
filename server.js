@@ -151,11 +151,11 @@ app.get({
 				// TODO: process payment with stripe...
 				
 				var mailOptions = {
-				    from: "MaceHammer <neary.matt@gmail.com>",
-				    to: "neary.matt@gmail.com",
-				    subject: "Payment ("+purchase.SKU+") ✔: "+purchase.name,
+				    from: "MaceHammer Storefront <neary.matt@gmail.com>",
+				    to: "macehammerfitness@gmail.com",
+				    subject: "Order of "+purchase.SKU+": "+purchase.name,
 				    text: "Payment from "+purchase.name,
-				    html: "<b>Payment went through.</b>"
+				    html: "<b>Payment has been processed.</b>"
 				};	
 				smtpTransport.sendMail(mailOptions, function(error, response){
 					res.end(JSON.stringify({ err: error, success: !error }));

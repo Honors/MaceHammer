@@ -6,7 +6,7 @@ body {
 #above_fold {
 	position: relative;
 	width: 100%;
-	background: rgb(46, 210, 233);
+	background: #000;
 	height: 558px;
 }
 #content {
@@ -31,7 +31,7 @@ body {
 	left: 0;
 	padding: 30px 20px 0 0;
 	font-size: 24px;
-	background: rgb(46, 210, 233);
+	background: #000;
 	box-sizing: border-box;
 	height: 500px;
 	width: 580px;
@@ -40,7 +40,7 @@ body {
 		font-size: 18px;
 		font-family: 'Lato';
 		font-weight: lighter;
-		color: #CAFFFF;
+		color: #fff;
 	}
 .embed {
 	height: 410px;
@@ -131,16 +131,16 @@ body {
 			text-shadow: 2px 2px rgba(50, 50, 50, .5);
 		}
 	#sphere, #core {
-		background: #2C589A;
+		background: #2C2C2C;
 	}
 	#handle, #tire {
-		background: #487AD6;
+		background: #484848;
 	}
 	#variety, #shoulder {
-		background: #8642E3;
+		background: #868686;
 	}
 	#weight, #grip {
-		background: #CF72F7;					
+		background: #CFCFCF;					
 	}
 #details {
 	padding-top: 20px;
@@ -180,14 +180,14 @@ body {
 		width: 470px;
 		padding: 20px;
 		box-sizing: border-box;
-		border-bottom: 1px solid rgb(46, 210, 233);
+		border-bottom: 1px solid #333;
 	}
 	#comp_table h3 {
 		margin: 0;
 		padding: 0;
 	}
 	#comp_table .item:nth-of-type(4n+1), #comp_table .item:nth-of-type(4n+2) {
-		background: rgba(46, 210, 233, .6);
+		background: #CCC;
 	}
 	#comp_table .item.header {
 		text-align: center;
@@ -197,7 +197,7 @@ body {
 	position: relative;
 	width: 100%;
 	font-family: 'Helvetica Neue';
-	background: #487AD6;
+	background: #484848;
 	font-size: 20px;
 	color: white;
 	height: 640px;
@@ -212,7 +212,7 @@ body {
 	margin-left: -480px;
 }
 #about .info {
-	background: #487AD6;
+	background: #484848;
 }
 #about .info, #about .hero {
 	height: 640px;
@@ -278,7 +278,7 @@ body {
 	position: relative;
 	width: 100%;
 	font-family: 'Helvetica Neue';
-	background: rgb(46, 210, 233);
+	background: #000;
 	font-size: 20px;
 	color: white;
 	height: 596px;

@@ -102,9 +102,10 @@ app.get({
 			});
 		} else {
 			var path = __dirname + req.url;		
+			var types = { "js": "text/javascript", "jpg": "image/jpeg", "html": "text/html", "png": "image/png" };
 			fs.stat(path, function(err, stat) {
 			    if (!err) {
-					res.writeHead(200, {'Content-Type': path.match(/js$/)?'text/javascript':'text/html'});
+					res.writeHead(200, {'Content-Type': types[path.match(/\.([^\.]+)$/)[1]]||"text/html"});
 					fs.createReadStream(path).pipe(res);
 			    } else {
 			        res.writeHead(404);
@@ -166,4 +167,4 @@ app.get({
 })
 
 
-exports.module = http.createServer(app);
+exports.module = http.createServer(app).listen(8080);

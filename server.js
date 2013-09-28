@@ -167,4 +167,8 @@ app.get({
 })
 
 
-exports.module = http.createServer(app);
+exports.module = http.createServer(function(req, res) {
+  // reject all requests
+  res.writeHead(301, { 'Content-Type': 'text/html' });
+  res.end("<h1>Moved Permanently.</h1>");
+});
